@@ -8,19 +8,25 @@ function ComputerVision() {
   const [fileSelected, setFileSelected] = useState(null);
   const [analysis, setAnalysis] = useState(null);
   const [processing, setProcessing] = useState(false);
+  const [error, setError] = useState(false)
   
   const handleChange = (e) => {
     setFileSelected(e.target.value) // controla a alteração do input da imagem
   }
-  const sendImage = (e) => {
+  const sendImage = () => {
     // hold UI
     setProcessing(true);
     setAnalysis(null);
+    setError(false)
 
     computerVision(fileSelected || null).then((item) => {
       // reset state/form
       setAnalysis(item); // defindo variável analysis com o retorno item da chamada da funcao
       setFileSelected("");
+    }).catch((err)=>{
+      setError(true)
+      console.log(err.message)
+    }).finally(()=>{
       setProcessing(false);
     });
 
@@ -44,14 +50,15 @@ function ComputerVision() {
           </tr>
         </thead>
         <tbody>
-          {analysis.tags.map(function (item, index) {
-            if(item.confidence>0.1)
+          {analysis.tags.map((item, index)=>{
+            if(item.confidence>0.1){
             return (
               <tr key={index}>
                 <td>{item.name}</td>
                 <td><ProgressBar now={item.confidence} label={`${item.confidence.toFixed(2)}%`} variant="success" min="0" max="1"/></td>
               </tr>
-            );
+            )}
+            return null
           })}
         </tbody>
       </table>
@@ -72,14 +79,16 @@ function ComputerVision() {
           </tr>
         </thead>
         <tbody>
-          {analysis.categories.map(function (item, index) {
-            if(item.score>0.1)
+          {analysis.categories?.map((item, index)=> {
+            if(item.score>0.1){
             return (
               <tr key={index}>
                 <td>{item.name}</td>
                 <td><ProgressBar now={item.score} label={`${item.score.toFixed(2)}%`} variant="success" min="0" max="1"/></td>
               </tr>
             );
+            }
+            return null
           })}
         </tbody>
       </table>
@@ -92,7 +101,7 @@ const DisplayCaption=()=>{
   return(
       <div>
         <h2> Descrição da imagem </h2>
-        {analysis.description.captions[0].text}
+        {analysis.description?.captions[0].text}
       </div>
   )
 };
@@ -111,13 +120,17 @@ const DisplayCaption=()=>{
   const Analyze = () => {
     return (
     <div className="container">
-      <h1 className="display-2" className="text-center">Análise de imagens Azure</h1>
+      <h1 className="display-2 text-center">Análise de imagens Azure</h1>
       {!processing &&
         <div className="text-center">
-          <div class="input-group mb-3">
+          <div className='mb-3'>
+          <div class="input-group" style={error ? {border: '2px solid red'}: null}>
             <span class="input-group-text" id="inputGroup-sizing-default">URL</span>
               <input class="form-control" type="text" placeholder="Entre com a URL" size="50" onChange={handleChange}></input>
             
+          </div>
+          {error? ( <h3 className='h3 text-left' style={{color: 'red'}}>tem um erro aqui</h3>) : null}
+         
           </div>
           <button className='btn btn-secondary' onClick={sendImage}>Analisar</button> 
         </div>

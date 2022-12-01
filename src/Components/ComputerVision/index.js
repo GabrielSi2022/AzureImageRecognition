@@ -150,17 +150,19 @@ function ComputerVision() {
           <div className="text-center">
             <div className="mb-3">
               <div
-                class="input-group"
+                className="input-group"
                 style={error ? { border: "2px solid red" } : null}
               >
-                <span class="input-group-text" id="inputGroup-sizing-default">
+                <span
+                  className="input-group-text"
+                  id="inputGroup-sizing-default"
+                >
                   URL
                 </span>
                 <input
-                  class="form-control"
+                  className="form-control"
                   type="text"
                   placeholder="Entre com a URL"
-                  size="50"
                   onChange={handleChange}
                 ></input>
               </div>

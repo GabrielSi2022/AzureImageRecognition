@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
 import Header from "./Components/Header";
 import Banner from "./Components/Banner";
 import "./index.css";

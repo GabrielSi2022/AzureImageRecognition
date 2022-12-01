@@ -12,8 +12,6 @@ import { ApiKeyCredentials } from '@azure/ms-rest-js';
 const key = "97fa72eed3304d189d8d43a3a3cb2650";
 const endpoint = "https://iaifmachadogabriel.cognitiveservices.azure.com/";
 
-console.log(`key = ${key}`)
-console.log(`endpoint = ${endpoint}`)
 
 // Cognitive service features
 const visualFeatures = [
@@ -30,9 +28,6 @@ const visualFeatures = [
 
 export const isConfigured = () => {
     const result = (key && endpoint && (key.length > 0) && (endpoint.length > 0)) ? true : false;
-    console.log(`key = ${key}`)
-    console.log(`endpoint = ${endpoint}`)
-    console.log(`ComputerVision isConfigured = ${result}`)
     return result;
 }
 

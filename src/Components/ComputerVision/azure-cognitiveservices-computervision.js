@@ -41,9 +41,14 @@ export const computerVision = async (url) => {
     // get image URL - entered in form or random from Default Images
     const urlToAnalyze = url;//  || RandomImageUrl();
     
+    try {
     // analyze image
     const analysis = await computerVisionClient.analyzeImage(urlToAnalyze, { visualFeatures,language:"pt" });
 
     // all information about image
     return { "URL": urlToAnalyze, ...analysis};
+    }
+    catch(e){
+        throw new Error('Consulta inválida')
+    }
 }

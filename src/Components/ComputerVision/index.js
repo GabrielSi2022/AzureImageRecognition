@@ -8,7 +8,7 @@ function ComputerVision() {
   const [fileSelected, setFileSelected] = useState(null);
   const [analysis, setAnalysis] = useState(null);
   const [processing, setProcessing] = useState(false);
-  const [error, setError] = useState(false)
+  const [error, setError] = useState("")
   
   const handleChange = (e) => {
     setFileSelected(e.target.value) // controla a alteração do input da imagem
@@ -17,15 +17,14 @@ function ComputerVision() {
     // hold UI
     setProcessing(true);
     setAnalysis(null);
-    setError(false)
+    setError("")
 
     computerVision(fileSelected || null).then((item) => {
       // reset state/form
       setAnalysis(item); // defindo variável analysis com o retorno item da chamada da funcao
       setFileSelected("");
     }).catch((err)=>{
-      setError(true)
-      console.log(err.message)
+      setError(err.message)
     }).finally(()=>{
       setProcessing(false);
     });
@@ -129,7 +128,7 @@ const DisplayCaption=()=>{
               <input class="form-control" type="text" placeholder="Entre com a URL" size="50" onChange={handleChange}></input>
             
           </div>
-          {error? ( <h3 className='h3 text-left' style={{color: 'red'}}>tem um erro aqui</h3>) : null}
+          {error? ( <h3 className='h3 text-left' style={{color: 'red'}}>{error}</h3>) : null}
          
           </div>
           <button className='btn btn-secondary' onClick={sendImage}>Analisar</button> 

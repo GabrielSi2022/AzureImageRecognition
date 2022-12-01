@@ -49,7 +49,7 @@ function ComputerVision() {
           </tr>
         </thead>
         <tbody>
-          {analysis.tags.map((item, index)=>{
+          {analysis.tags?.map((item, index)=>{
             if(item.confidence>0.1){
             return (
               <tr key={index}>

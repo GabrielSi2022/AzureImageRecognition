@@ -48,21 +48,21 @@ function ComputerVision() {
   const DisplayTag = () => {
     return (
       <div>
-        <h2>Tags</h2>
+        <h2 className="text-white">Tags</h2>
         <table className="table">
           <thead>
             <tr>
-              <th>Name </th>
-              <th>Confiança </th>
+              <th className="text-white">Name </th>
+              <th className="text-white">Confiança </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="">
             {analysis.tags?.map((item, index) => {
               if (item.confidence > 0.1) {
                 return (
                   <tr key={index}>
-                    <td>{item.name}</td>
-                    <td>
+                    <td className="text-white">{item.name}</td>
+                    <td className="">
                       <ProgressBar
                         now={item.confidence}
                         label={`${item.confidence.toFixed(2)}%`}
@@ -85,23 +85,23 @@ function ComputerVision() {
   const DisplayCategorias = () => {
     return (
       <div>
-        <div>
-          <img src={analysis.URL} height="200" border="1" alt="Imagem" />
+        <div >
+          <img src={analysis.URL} height="300" border="1" alt="Imagem" />
         </div>
-        <h3>Categorias</h3>
-        <table className="table">
+        <h3 className="text-white">Categorias</h3>
+        <table className="table ">
           <thead>
             <tr>
-              <th>Categoria </th>
-              <th>Confiança </th>
+              <th className="text-white">Categoria </th>
+              <th className="text-white">Confiança </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-white">
             {analysis.categories?.map((item, index) => {
               if (item.score > 0.1) {
                 return (
                   <tr key={index}>
-                    <td>{item.name}</td>
+                    <td className="text-white">{item.name}</td>
                     <td>
                       <ProgressBar
                         now={item.score}
@@ -124,8 +124,8 @@ function ComputerVision() {
 
   const DisplayCaption = () => {
     return (
-      <div>
-        <h2> Descrição da imagem </h2>
+      <div className="text-white h4">
+        <h2 className="text-white"> Descrição da imagem </h2>
         {analysis.description?.captions[0].text}
       </div>
     );
@@ -144,8 +144,8 @@ function ComputerVision() {
 
   const Analyze = () => {
     return (
-      <div className="container">
-        <h1 className="display-2 text-center">Análise de imagens Azure</h1>
+      <div className="container bg-dark bg-gradient rounded">
+        <h1 className="display-2 text-center text-success">Análise de imagens Azure</h1>
         {!processing && (
           <div className="text-center">
             <div className="mb-3">
@@ -172,12 +172,12 @@ function ComputerVision() {
                 </h3>
               ) : null}
             </div>
-            <button className="btn btn-secondary" onClick={sendImage}>
+            <button className="btn btn-outline-success btn-lg" onClick={sendImage}>
               Analisar
             </button>
           </div>
         )}
-        {processing && <div>Processing</div>}
+        {processing && <div className="text-success">Processing</div>}
         <hr />
         {analysis && DisplayResults()}
       </div>

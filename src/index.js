@@ -10,8 +10,8 @@ root.render(
   <div>
     <Header />
     <Banner
-      videoTitle={"Meu Video"}
-      url={"https://www.youtube.com/watch?v=3BhkeY974Rg"}
+      videoTitle={"Classificação de Animais"}
+      url={"https://www.youtube.com/watch?v=4LmpP6XUufA"}
       videoDescription={"IFSULDEMINAS"}
     />
     <ComputerVision />
